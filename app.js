@@ -1,4 +1,7 @@
-let playerSelectionPrompt = prompt("Enter: 'rock', 'paper' or 'scissors'");
+// put the playerSelectionPrompt somewhere where it will run every round.
+
+
+
 
 function computerPlay() {
     computerChoice = Math.floor(Math.random() * 3) + 1
@@ -16,8 +19,9 @@ function computerPlay() {
 }
 
 function playRound() {
+    let playerSelectionPrompt = prompt("Enter: 'rock', 'paper' or 'scissors'");
     let computerSelection = computerPlay();
-    let playerSelection = playerSelectionPrompt;
+    let playerSelection = playerSelectionPrompt.toLowerCase();
     
     if (playerSelection === computerSelection) {
         console.log("its a draw")
@@ -37,9 +41,11 @@ function playRound() {
     } else if (computerSelection === "paper" && playerSelection === "rock") {
         console.log("You lose! paper beats rock")
         return "lose"
-    } else if (computerSelection === "pascissorsper" && playerSelection === "paper") {
+    } else if (computerSelection === "scissors" && playerSelection === "paper") {
         console.log("You lose! scissors beats paper")
         return "lose"
+    } else {
+        return "Please refresh the page and enter rock paper or scissors"
     }
 }
 
@@ -50,16 +56,19 @@ function game() {
     let computerScore = 0;
     let drawScore = 0;
     let round = 0;
+    let result;
     for (i = 0; i < 5; i++) {
         round++
         console.log (round)
-        let result = playRound()
+        result = playRound()
         if (result.toLowerCase().includes("win")) {
             playerScore++  
         } else if (result.toLowerCase().includes("lose")) {
             computerScore++
         } else if (result.toLowerCase().includes("draw")) {
             drawScore++
+        } else {
+            break;
         }
     }
     if (round > 4 && playerScore > computerScore) {
@@ -67,7 +76,9 @@ function game() {
     } else if (round > 4 && computerScore > playerScore) {
         console.log(`You lose, Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`)
     } else if (round > 4 && computerScore === playerScore) {
-        console.log(`Draw!, Player score:${playerScore} Computer score:${computerScore}number of draws: ${drawScore}`)
+        console.log(`Draw!, Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`)
+    } else {
+        console.log(result)
     }
 }
 
