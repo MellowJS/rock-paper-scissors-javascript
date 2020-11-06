@@ -1,0 +1,22 @@
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.button {
+    margin: 30px;
+    padding: 30px;
+    border: 2px solid #FF686B;
+    background-color: #ffa69e;
+    border-radius: 11px;
+}
+
+.button:hover {
+    background-color: #84DCC6;
+}
+
+.button:active {
+    background-color: #84DCC6;
+}
