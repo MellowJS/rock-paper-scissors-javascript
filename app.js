@@ -18,7 +18,7 @@ buttonScissors.addEventListener("click", playRound);
 
 
 function computerPlay() {
-    computerChoice = Math.floor(Math.random() * 3) + 1
+    let computerChoice = Math.floor(Math.random() * 3) + 1
     switch(computerChoice) {
         case 1:
             return "rock";
