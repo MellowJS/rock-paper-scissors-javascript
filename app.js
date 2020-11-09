@@ -1,5 +1,3 @@
-// put the playerSelectionPrompt somewhere where it will run every round.
-
 const buttonRock = document.querySelector('#rock-button');
 const buttonPaper = document.querySelector('#paper-button');
 const buttonScissors = document.querySelector('#scissors-button');
