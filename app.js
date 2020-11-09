@@ -7,6 +7,11 @@ const buttonScissors = document.querySelector('#scissors-button');
 const resultContainer = document.querySelector('#result-container');
 const scoreContainer = document.querySelector('#score-container');
 
+let round = 0;
+let playerScore = 0;
+let computerScore = 0;
+let drawScore = 0;
+
 buttonRock.addEventListener("click", playRound);
 buttonPaper.addEventListener("click", playRound);
 buttonScissors.addEventListener("click", playRound);
@@ -30,68 +35,62 @@ function computerPlay() {
 }
 
 
-
-function playRound(event) {
-    
+function playRound(event){
     let computerSelection = computerPlay();
     let playerSelection = event.target.getAttribute("value");
+    let result; 
+
     
+    round++
+    console.log(round)
     if (playerSelection === computerSelection) {
-        resultContainer.textContent = "Draw"
-        return "draw"
+        drawScore++
+        resultContainer.textContent = "Draw";
+        result = "draw";
     } else if (playerSelection === "rock" && computerSelection === "scissors") { //wins
-        resultContainer.textContent = "You win! rock beats scissors"
-        return "win"
+        playerScore++
+        resultContainer.textContent = "You win! rock beats scissors";
+        result = "win";
     } else if (playerSelection === "paper" && computerSelection === "rock"){ 
-        resultContainer.textContent = "You win! paper beats rock"
-        return "win"
+        playerScore++
+        resultContainer.textContent = "You win! paper beats rock";
+        result = "win";
     } else if (playerSelection === "scissors" && computerSelection === "paper"){ 
-        resultContainer.textContent = "You win! scissors beats paper"
-        return "win"
+        playerScore++
+        resultContainer.textContent = "You win! scissors beats paper";
+        result = "win";
     } else if (computerSelection === "rock" && playerSelection === "scissors") { //losses 
-        resultContainer.textContent = "You lose! rock beats scissors"
-        return "lose"
+        computerScore++
+        resultContainer.textContent = "You lose! rock beats scissors";
+        result = "lose";
     } else if (computerSelection === "paper" && playerSelection === "rock") {
-        resultContainer.textContent = "You lose! paper beats rock"
-        return "lose"
+        computerScore++
+        resultContainer.textContent = "You lose! paper beats rock";
+        result = "lose";
     } else if (computerSelection === "scissors" && playerSelection === "paper") {
-        resultContainer.textContent = "You lose! scissors beats paper"
-        return "lose"
+        computerScore++
+        resultContainer.textContent = "You lose! scissors beats paper";
+        result = "lose";
     } else {
-        return "Please refresh the page and enter rock paper or scissors"
+        result = "Please refresh the page and enter rock paper or scissors";
     }
-}
 
+    
 
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let drawScore = 0;
-    let round = 0;
-    let result;
-    for (i = 0; i < 5; i++) {
-        round++
-        console.log (round)
-        result = playRound()
-        if (result.toLowerCase().includes("win")) {
-            playerScore++  
-        } else if (result.toLowerCase().includes("lose")) {
-            computerScore++
-        } else if (result.toLowerCase().includes("draw")) {
-            drawScore++
-        } else {
-            break;
-        }
-    }
     if (round > 4 && playerScore > computerScore) {
-        scoreContainer.textContent = `You win, Player score: ${playerScore} Computer score: ${computerScore} number of draws: ${drawScore}`
+        scoreContainer.textContent = `You win, Round: ${round} Player score: ${playerScore} Computer score: ${computerScore} number of draws: ${drawScore}`;
     } else if (round > 4 && computerScore > playerScore) {
-        scoreContainer.textContent = `You lose, Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`
+        scoreContainer.textContent = `You lose, Round: ${round} Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`;
     } else if (round > 4 && computerScore === playerScore) {
-        scoreContainer.textContent = `Draw!, Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`
+        scoreContainer.textContent = `Draw!, Round: ${round} Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`;
     } else {
-        scoreContainer.textContent = result
-}
+        scoreContainer.textContent = `Running Score: Round: ${round} Player score:${playerScore} Computer score:${computerScore} number of draws: ${drawScore}`;
+    }
 
-game()
+    if (round > 4) {
+        round = 0;
+        drawScore = 0;
+        playerScore = 0;
+        computerScore = 0;
+    }
+}
